@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/txv_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:text="꿈 공유 게시글 상세보기"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+        </FrameLayout>
+
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_bg_ex"
+        android:hint="공유한 게시글 제목"
+        />
+    <TextView
+        android:layout_width="370dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_bg_ex"
+        android:hint="추가한 코멘트"
+        />
+
+    <TextView
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="5dp"
+        android:text="공유 한 게시물"/>
+    <TextView
+        android:layout_width="370dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_bg_ex"
+        android:layout_marginTop="5dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_bg_ex"
+            android:layout_marginRight="10dp"
+            android:text="댓글보기" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_bg_ex"
+            android:layout_marginRight="10dp"
+            android:text="목록" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_bg_ex"
+            android:text="삭제" />
+    </LinearLayout>
+
+
+</LinearLayout>
