@@ -1,9 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ModifyAccountActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/labelChangePw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="비밀번호 변경" />
+
+        <EditText
+            android:id="@+id/txtPw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="변경할 비밀번호를 입력해주세요" />
+
+        <EditText
+            android:id="@+id/txtPwConfirmed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="변경할 비밀번호를 다시 입력해주세요" />
+
+        <Button
+            android:id="@+id/btnChangePw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickChangePw"
+            android:text="비밀번호 변경" />
+
+
+        <TextView
+            android:id="@+id/labelQuit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="회원 탈퇴" />
+
+        <TextView
+            android:id="@+id/labelQuitDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="회원 탈퇴을 탈퇴하게 되면 모든 공유한 게시글과 댓글이 삭제됩니다. 계속하시겠습니까?" />
+
+        <Button
+            android:id="@+id/btnQuit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickQuit"
+            android:text="회원 탈퇴" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
