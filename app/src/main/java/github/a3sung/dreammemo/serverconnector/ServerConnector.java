@@ -187,5 +187,65 @@ public class ServerConnector {
 
     }
 
+    public void requestPostWithAuthorizeToken(final String url, final String token, final String data, final RequestCallback requestCallback, final ErrorCallback errorCallback){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                URL endpoint = null;
+                HttpURLConnection conn = null;
+                try {
+                    endpoint = new URL(url);
+                    conn = (HttpURLConnection) endpoint.openConnection();
+                    conn.setConnectTimeout(CONNECTION_TIME);
+                    conn.setReadTimeout(READ_TIME);
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Authorization", token);
+                    conn.setDoOutput(true);
+                    conn.getOutputStream().write(data.getBytes());
+                    if (conn.getResponseCode() == 200){ // 네트워크 연결에 성공했을 경우
+
+                        // 인풋 가져옴
+                        InputStream is = conn.getInputStream();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                        StringBuilder sbr = new StringBuilder(); // 읽어온 스트링 저장하는 스트링빌더
+                        String line = null; // 한줄씩 들어가는 임시 보관소
+                        while ((line = br.readLine()) != null){
+                            sbr.append(line);
+                        }
+
+                        br.close();
+                        is.close();
+
+                        // callback 함수 호출
+                        Log.d("ServerConnector", "from Server, " + sbr.toString());
+                        requestCallback.requestCallback(sbr.toString());
+                    } else {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                        StringBuilder sbr = new StringBuilder(); // 읽어온 스트링 저장하는 스트링빌더
+                        String line = null; // 한줄씩 들어가는 임시 보관소
+                        while ((line = br.readLine()) != null){
+                            sbr.append(line);
+                        }
+                        br.close();
+                        Log.d("Warning", sbr.toString());
+                        errorCallback.errCallback(conn.getResponseCode());
+                    }
+                } catch(ConnectTimeoutException e){
+                    e.printStackTrace();
+                    errorCallback.errCallback(ErrorCallback.ERR_CONECTION_TIMEOUT);
+                }catch (MalformedURLException e) {
+                    e.printStackTrace();
+                    errorCallback.errCallback(ErrorCallback.ERR_MALFORM_URL);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    errorCallback.errCallback(ErrorCallback.ERR_ETC);
+                } finally {
+                    conn.disconnect();
+                }
+
+            }
+        });
+    }
+
 
 }
