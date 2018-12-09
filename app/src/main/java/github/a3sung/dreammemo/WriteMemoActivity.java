@@ -2,6 +2,7 @@ package github.a3sung.dreammemo;
 
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class WriteMemoActivity extends AppCompatActivity {
     private Button cancel;
@@ -23,6 +27,7 @@ public class WriteMemoActivity extends AppCompatActivity {
         cancel = (Button)findViewById(R.id.local_memo_cancel);
         save = (Button)findViewById(R.id.local_memo_save);
         init_tables();
+        Toast.makeText(getApplication(), "make DB!", Toast.LENGTH_SHORT).show();
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,10 +43,14 @@ public class WriteMemoActivity extends AppCompatActivity {
 
     private void save_values(){
         EditText title = (EditText)findViewById(R.id.local_memo_title_text);
-        EditText keyword = (EditText)findViewById(R.id.local_memo_keyword_text);
         EditText context = (EditText)findViewById(R.id.local_memo_content_text);
 
-        dbHelper.insertIntoLocal(title.toString(), context.toString());
-        Toast.makeText(getApplication(), "저장 완료!", Toast.LENGTH_SHORT);
+        Long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd");
+        String publishDate = simpleformat.format(date);
+
+        dbHelper.insert(title.getText().toString(), context.getText().toString(), publishDate);
+        Toast.makeText(getApplication(), "저장 완료!", Toast.LENGTH_SHORT).show();
     }
 }

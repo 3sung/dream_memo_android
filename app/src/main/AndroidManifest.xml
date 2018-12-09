@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MemoListActivity" />
         <activity android:name=".ViewMemoActivity" />
-        <activity android:name=".WriteMemoActivity">
+        <activity android:name=".WriteMemoActivity" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,9 @@
         <activity android:name=".WriteDreamPostActivity" />
         <activity android:name=".CommentListActivity" />
         <activity android:name=".ModifyCommentActivity" />
-        <activity android:name=".MyDreamPostListActivity"></activity>
+        <activity android:name=".MyDreamPostListActivity">
+
+        </activity>
     </application>
 
 </manifest>

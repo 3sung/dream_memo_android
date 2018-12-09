@@ -1,9 +1,13 @@
 package github.a3sung.dreammemo;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class ContactDBHelper extends SQLiteOpenHelper {
 
@@ -19,8 +23,9 @@ public class ContactDBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS LOCAL_MEMO("
                 + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "title TEXT, "
-                + "context TEXT"
-                + ")");
+                + "context TEXT, "
+                + "date TEXT"
+                + ");");
     }
 
     @Override
@@ -28,9 +33,27 @@ public class ContactDBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertIntoLocal(String title, String context){
+    public void insert(String title, String context, String date){
         SQLiteDatabase db=getWritableDatabase();
-        db.execSQL("INSERT INTO LOCAL_MEMO VALUES(null, '" + title +"', '" + context + "');");
+        String sqlInsert = "INSERT INTO LOCAL_MEMO(title, context, date) VALUES('" + title + "', '" + context +  "', '" + date + "');";
+        db.execSQL(sqlInsert);
         db.close();
+    }
+
+    public ArrayList<String> getResult(){
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<String> result = new ArrayList<String>();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM LOCAL_MEMO", null);
+        cursor.moveToFirst();
+        while (cursor.moveToNext()){
+            String temp =  cursor.getString(0)
+                    + "  "
+                    + cursor.getString(1)
+                    + "   "
+                    + cursor.getString(3);
+            result.add(temp);
+        }
+        return result;
     }
 }
