@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="내꿈 목록 조회"
+                android:text="꿈 공유 게시판"
                 android:textColor="#000000"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -36,12 +36,20 @@
 
 
     </android.support.v7.widget.Toolbar>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_ex"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:text="글쓰기"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_ex"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
         <EditText
@@ -57,7 +65,7 @@
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:background="@drawable/search"
-         />
+            />
 
     </LinearLayout>
     <LinearLayout
@@ -80,7 +88,7 @@
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:gravity="center_horizontal"
-                android:text="글번호"/>
+                android:text="키워드"/>
             <TextView
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
@@ -89,7 +97,6 @@
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:gravity="center_horizontal"
-
                 android:text="제목"/>
             <TextView
                 android:layout_width="120dp"
@@ -99,7 +106,6 @@
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:gravity="center_horizontal"
-
                 android:text="날짜"/>
 
 
