@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import github.a3sung.dreammemo.account.AccountController;
+import github.a3sung.dreammemo.serverconnector.ErrorCallback;
 import github.a3sung.dreammemo.serverconnector.RequestCallback;
 import github.a3sung.dreammemo.serverconnector.ServerConnector;
 
@@ -71,10 +72,14 @@ public class SignInActivity extends AppCompatActivity {
                     loginSuccessHandler.sendMessage(msg);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    // TODO: (중요도1) 로그인 실패 시 로그인 제한 되게 하기
-                    Message msg = loginFailHandler.obtainMessage();
-                    loginFailHandler.sendMessage(msg);
                 }
+            }
+        }, new ErrorCallback() {
+            @Override
+            public void errCallback(int resultCode) {
+                // TODO: (중요도1) 로그인 실패 시 로그인 제한 되게 하기
+                Message msg = loginFailHandler.obtainMessage();
+                loginFailHandler.sendMessage(msg);
             }
         });
     }

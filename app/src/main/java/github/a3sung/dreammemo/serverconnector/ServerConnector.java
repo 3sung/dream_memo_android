@@ -138,7 +138,6 @@ public class ServerConnector {
                     conn = (HttpURLConnection) endpoint.openConnection();
                     conn.setConnectTimeout(CONNECTION_TIME);
                     conn.setReadTimeout(READ_TIME);
-                    conn.setRequestProperty("Content-type", "application/json");
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);
                     conn.getOutputStream().write(data.getBytes());
@@ -160,6 +159,14 @@ public class ServerConnector {
                         Log.d("ServerConnector", "from Server, " + sbr.toString());
                         requestCallback.requestCallback(sbr.toString());
                     } else {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                        StringBuilder sbr = new StringBuilder(); // 읽어온 스트링 저장하는 스트링빌더
+                        String line = null; // 한줄씩 들어가는 임시 보관소
+                        while ((line = br.readLine()) != null){
+                            sbr.append(line);
+                        }
+                        br.close();
+                        Log.d("Warning", sbr.toString());
                         errorCallback.errCallback(conn.getResponseCode());
                     }
                 } catch(ConnectTimeoutException e){

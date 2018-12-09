@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import github.a3sung.dreammemo.serverconnector.ErrorCallback;
 import github.a3sung.dreammemo.serverconnector.RequestCallback;
 import github.a3sung.dreammemo.serverconnector.ServerConnector;
 
@@ -29,6 +30,13 @@ public class SignUpActivity extends AppCompatActivity {
         }
     };
 
+    private Handler signUpFailHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +67,19 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         ServerConnector svConn = ServerConnector.getInstatnce();
-        svConn.requestPost(ServerConnector.BASE_URL + "signIn", String.format("userID=%s&userEmail=%s&userPW=%s", userId, userEmail, userPw), new RequestCallback() {
+        svConn.requestPost(ServerConnector.BASE_URL + "signUp", String.format("userID=%s&userEmail=%s&userPW=%s", userId, userEmail, userPw), new RequestCallback() {
             @Override
             public void requestCallback(String result) {
                 Log.d("Account", "Sign Up success!");
                 Message msg = signUpSuccessHandler.obtainMessage();
                 signUpSuccessHandler.sendMessage(msg);
+            }
+        }, new ErrorCallback() {
+            @Override
+            public void errCallback(int resultCode) {
+                Log.d("TAG", "err code" + resultCode);
+                Message msg = signUpFailHandler.obtainMessage();
+                signUpFailHandler.sendMessage(msg);
             }
         });
 
