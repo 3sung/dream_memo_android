@@ -10,13 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MemoListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".MemoListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ViewMemoActivity" />
         <activity android:name=".WriteMemoActivity" />
@@ -24,13 +21,29 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".ModifyAccountActivity" />
-        <activity android:name=".DreamPostListActivity" />
-        <activity android:name=".ViewDreamPostActivity" />
+        <activity android:name=".DreamPostListActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter></activity>
+
+        <activity android:name=".ViewDreamPostActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity android:name=".ViewCommentActivity" />
         <activity android:name=".WriteDreamPostActivity" />
         <activity android:name=".CommentListActivity" />
         <activity android:name=".ModifyCommentActivity" />
-        <activity android:name=".MyDreamPostListActivity"></activity>
+        <activity android:name=".MyDreamPostListActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
