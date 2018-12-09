@@ -18,25 +18,10 @@ public class MemoListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("TTESTT","resume");
-        ServerConnector svConn = ServerConnector.getInstatnce();
-        svConn.requestPost(ServerConnector.BASE_URL + "signUp", String.format("userID=%s&userEmail=%s&userPW=%s", "test", "test@test.com", "test"), new RequestCallback() {
-            @Override
-            public void requestCallback(String result) {
-                Log.d("TTESTT","register result " + result);
-            }
-        });
-        svConn.requestGet(ServerConnector.BASE_URL + "signIn?userID=test&userPW=test", new RequestCallback() {
-            @Override
-            public void requestCallback(String result) {
-                Log.d("TTESTT","login result " + result);
-            }
-        });
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("TTESTT","pause");
     }
 }
