@@ -1,6 +1,7 @@
 package github.a3sung.dreammemo.serverconnector;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.http.conn.ConnectTimeoutException;
 
@@ -77,6 +78,7 @@ public class ServerConnector {
                         br.close();
                         is.close();
                         // callback 함수 호출
+                        Log.d("ServerConnector", "from Server, " + sbr.toString());
                         requestCallback.requestCallback(sbr.toString());
                     }
                     else  {
@@ -153,6 +155,7 @@ public class ServerConnector {
                         is.close();
 
                         // callback 함수 호출
+                        Log.d("ServerConnector", "from Server, " + sbr.toString());
                         requestCallback.requestCallback(sbr.toString());
                     } else {
                         errorCallback.errCallback(conn.getResponseCode());
