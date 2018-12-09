@@ -28,8 +28,8 @@ public class ServerConnector {
         return instatnce;
     }
 
-    public static final int CONNECTION_TIME = 100000;
-    public static final int READ_TIME = 100000;
+    public static final int CONNECTION_TIME = 1000;
+    public static final int READ_TIME = 1000;
     public static final String BASE_URL = "http://cau20162990.iptime.org:3000/";
 
     /**
@@ -59,6 +59,8 @@ public class ServerConnector {
             public void run() {
                 URL endpoint = null;
                 HttpURLConnection conn = null;
+                InputStream is = null;
+                BufferedReader br = null;
                 try {
                     endpoint = new URL(url);
                     conn = (HttpURLConnection) endpoint.openConnection();
@@ -67,8 +69,8 @@ public class ServerConnector {
                     if (conn.getResponseCode() == 200){ // 네트워크 연결에 성공했을 경우
 
                         // 인풋 가져옴
-                        InputStream is = conn.getInputStream();
-                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                        is = conn.getInputStream();
+                        br = new BufferedReader(new InputStreamReader(is));
                         StringBuilder sbr = new StringBuilder(); // 읽어온 스트링 저장하는 스트링빌더
                         String line = null; // 한줄씩 들어가는 임시 보관소
                         while ((line = br.readLine()) != null){

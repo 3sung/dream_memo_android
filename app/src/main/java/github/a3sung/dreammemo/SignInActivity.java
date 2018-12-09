@@ -53,34 +53,30 @@ public class SignInActivity extends AppCompatActivity {
         ServerConnector svConn = ServerConnector.getInstatnce();
         String userId = txtId.getText().toString();
         String userPw = txtPw.getText().toString();
+        Log.d("SignInActivity", String.format("test %s %s", userId, userPw));
 
-        svConn.requestGet(ServerConnector.BASE_URL + String.format("signin?userID=%s&userPW%s", userId, userPw), new RequestCallback() {
+
+        svConn.requestGet(ServerConnector.BASE_URL + String.format("signIn?userID=%s&userPW=%s", userId, userPw), new RequestCallback() {
             @Override
             public void requestCallback(String result) {
                 try {
+                    Log.d("SignInActivity", "test" + result);
                     JSONObject resultObj = new JSONObject(result);
                     String token = resultObj.getString("token");
                     Log.d("Account", "token info : " + token);
-                    if (validateToken(token)){
-                        AccountController.getInstance().signIn(token);
-                        Message msg = loginSuccessHandler.obtainMessage();
-                        loginSuccessHandler.sendMessage(msg);
-                    }
-                    else {
-                        // TODO: (중요도1) 로그인 실패 시 로그인 제한 되게 하기
-                        Message msg = loginFailHandler.obtainMessage();
-                        loginFailHandler.sendMessage(msg);
-                    }
+
+                    // 로그인 성공
+                    AccountController.getInstance().signIn(token);
+                    Message msg = loginSuccessHandler.obtainMessage();
+                    loginSuccessHandler.sendMessage(msg);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    // TODO: (중요도1) 로그인 실패 시 로그인 제한 되게 하기
+                    Message msg = loginFailHandler.obtainMessage();
+                    loginFailHandler.sendMessage(msg);
                 }
             }
         });
-    }
-
-    private boolean validateToken(String token){
-        // TODO: (중요도5) 로그인 성공한 토큰인지 아닌지 확인
-        return true;
     }
 
     public void onClickSignUp(View view){
