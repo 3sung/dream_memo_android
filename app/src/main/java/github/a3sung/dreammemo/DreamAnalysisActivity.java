@@ -34,15 +34,17 @@ public class DreamAnalysisActivity extends AppCompatActivity {
 
         // init tag text
         Intent fromIntent = getIntent();
-        String tagStr = fromIntent.getExtras().getString("tag");
         try {
-            if (tagStr != null){
-                JSONArray tagObj = new JSONArray(tagStr);
-                for (int i = 0; i < tagObj.length(); i++){
-                    tags.add(tagObj.getString(i));
-                    labelTag.append(tagObj.getString(i));
-                    if (i != tagObj.length()-1){
-                        labelTag.append(", ");
+            if (fromIntent.getExtras() != null){
+                String tagStr = fromIntent.getExtras().getString("tag");
+                if (tagStr != null){
+                    JSONArray tagObj = new JSONArray(tagStr);
+                    for (int i = 0; i < tagObj.length(); i++){
+                        tags.add(tagObj.getString(i));
+                        labelTag.append(tagObj.getString(i));
+                        if (i != tagObj.length()-1){
+                            labelTag.append(", ");
+                        }
                     }
                 }
             }
