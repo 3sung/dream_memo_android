@@ -24,7 +24,8 @@ public class ContactDBHelper extends SQLiteOpenHelper {
                 + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "title TEXT, "
                 + "context TEXT, "
-                + "date TEXT"
+                + "date TEXT, "
+                + "keywords TEXT"
                 + ");");
     }
 
@@ -33,9 +34,9 @@ public class ContactDBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insert(String title, String context, String date){
+    public void insert(String title, String context, String date, String keywords){
         SQLiteDatabase db=getWritableDatabase();
-        String sqlInsert = "INSERT INTO LOCAL_MEMO(title, context, date) VALUES('" + title + "', '" + context +  "', '" + date + "');";
+        String sqlInsert = "INSERT INTO LOCAL_MEMO(title, context, date, keywords) VALUES('" + title + "', '" + context +  "', '" + date + "', '" + keywords.replace(" ", "").replace(",", "#") + "');";
         db.execSQL(sqlInsert);
         db.close();
     }
@@ -49,7 +50,7 @@ public class ContactDBHelper extends SQLiteOpenHelper {
             return result;
         }
         do{
-            String temp =  cursor.getString(0)
+            String temp =  cursor.getString(4).replace("#", ",")
                     + "                "
                     + cursor.getString(1)
                     + "                        "
@@ -65,11 +66,8 @@ public class ContactDBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM LOCAL_MEMO WHERE ID = " + id, null);
         cursor.moveToFirst();
-        String temp = cursor.getString(1);
-        temp = cursor.getString(2);
-        temp = cursor.getString(3);
         result[0] = cursor.getString(1);
-        result[1] = "keywords";
+        result[1] = cursor.getString(4);
         result[2] = cursor.getString(2);
         return result;
     }

@@ -50,13 +50,14 @@ public class WriteMemoActivity extends AppCompatActivity {
     private void save_values(){
         EditText title = (EditText)findViewById(R.id.local_memo_title_text);
         EditText context = (EditText)findViewById(R.id.local_memo_content_text);
+        EditText keywords = (EditText) findViewById(R.id.local_memo_keyword_text);
 
         Long now = System.currentTimeMillis();
         Date date = new Date(now);
         SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy.MM.dd");
         String publishDate = simpleformat.format(date);
 
-        dbHelper.insert(title.getText().toString(), context.getText().toString(), publishDate);
+        dbHelper.insert(title.getText().toString(), context.getText().toString(), publishDate, keywords.getText().toString());
         Toast.makeText(getApplication(), "저장 완료!", Toast.LENGTH_SHORT).show();
         gotoList();
     }
