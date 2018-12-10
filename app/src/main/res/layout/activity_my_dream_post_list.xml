@@ -44,20 +44,16 @@
         android:layout_marginTop="25dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
+
         <EditText
             android:id="@+id/keyword_search"
-            android:layout_width="330dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="25dp"
             android:layout_marginLeft="1dp"
+            android:background="@drawable/btn_ex"
             android:hint="키워드 검색"
-            android:background="@drawable/btn_ex"/>
-
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/search" />
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

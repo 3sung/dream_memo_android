@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class ModifyMemoActivity extends AppCompatActivity {
 
@@ -65,6 +66,8 @@ public class ModifyMemoActivity extends AppCompatActivity {
 
                 dbHelper.insert(title.getText().toString(), context.getText().toString(), publishDate, keywords.getText().toString());
                 Toast.makeText(getApplication(), "수정 완료!", Toast.LENGTH_SHORT).show();
+                ArrayList<String> temp = dbHelper.getIdList();
+                goList.putExtra("id", temp.get(temp.size() - 1));
                 startActivity(goList);
             }
         });
