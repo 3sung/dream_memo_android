@@ -24,6 +24,7 @@
         <activity android:name=".WriteDreamPostActivity" />
         <activity android:name=".CommentListActivity" />
         <activity android:name=".ModifyCommentActivity" />
+        <activity android:name=".ModifyMemoActivity" />
         <activity android:name=".MyDreamPostListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

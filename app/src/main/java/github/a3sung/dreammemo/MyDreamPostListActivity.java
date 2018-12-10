@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class MyDreamPostListActivity extends AppCompatActivity {
     private ArrayList<String> lists;
+    private ArrayList<String> listIds;
     private ContactDBHelper dbHelper;
     private ListView listView;
     private ArrayAdapter<String> adapter;
@@ -26,6 +27,7 @@ public class MyDreamPostListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_dream_post_list);
         dbHelper = new ContactDBHelper(getApplicationContext());
         lists = dbHelper.getResult();
+        listIds = dbHelper.getIdList();
         listView = (ListView) findViewById(R.id.local_memo_lists);
         localMemoWrite = (Button)findViewById(R.id.local_memo_write);
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lists);
@@ -43,8 +45,7 @@ public class MyDreamPostListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MyDreamPostListActivity.this, ViewMemoActivity.class);
-                String[] temp = lists.get(position).split(" ");
-                intent.putExtra("id", temp[0]);
+                intent.putExtra("id", listIds.get(position));
                 startActivity(intent);
             }
         });

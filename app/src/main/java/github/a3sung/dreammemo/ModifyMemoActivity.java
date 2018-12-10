@@ -19,6 +19,7 @@ public class ModifyMemoActivity extends AppCompatActivity {
     String id;
     private ContactDBHelper dbHelper;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_memo);
@@ -41,6 +42,7 @@ public class ModifyMemoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goList = new Intent(ModifyMemoActivity.this, ViewMemoActivity.class);
                 goList.putExtra("id", id);
+                goList.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(goList);
             }
         });
@@ -49,7 +51,7 @@ public class ModifyMemoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dbHelper.deleteItem(getApplicationContext(), id);
-                Intent goList = new Intent(ModifyMemoActivity.this, MyDreamPostListActivity.class);
+                Intent goList = new Intent(ModifyMemoActivity.this, ViewMemoActivity.class);
                 EditText title = (EditText)findViewById(R.id.local_memo_title_text);
                 EditText context = (EditText)findViewById(R.id.local_memo_content_text);
                 EditText keywords = (EditText)findViewById(R.id.local_memo_keyword_text);
@@ -58,6 +60,8 @@ public class ModifyMemoActivity extends AppCompatActivity {
                 Date date = new Date(now);
                 SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy.MM.dd");
                 String publishDate = simpleformat.format(date);
+
+                goList.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 dbHelper.insert(title.getText().toString(), context.getText().toString(), publishDate, keywords.getText().toString());
                 Toast.makeText(getApplication(), "수정 완료!", Toast.LENGTH_SHORT).show();

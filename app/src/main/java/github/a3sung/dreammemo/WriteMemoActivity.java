@@ -1,12 +1,8 @@
 package github.a3sung.dreammemo;
 
 import android.content.Intent;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +60,7 @@ public class WriteMemoActivity extends AppCompatActivity {
 
     private void gotoList(){
         Intent intent = new Intent(WriteMemoActivity.this, MyDreamPostListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

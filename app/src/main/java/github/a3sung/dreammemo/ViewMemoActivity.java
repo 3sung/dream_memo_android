@@ -40,6 +40,7 @@ public class ViewMemoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dbHelper.deleteItem(getApplicationContext(), selected_id);
                 Intent gotoList = new Intent(ViewMemoActivity.this, MyDreamPostListActivity.class);
+                gotoList.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(gotoList);
             }
         });

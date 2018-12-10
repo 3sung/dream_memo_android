@@ -60,6 +60,20 @@ public class ContactDBHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public ArrayList<String> getIdList(){
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<String> result = new ArrayList<String>();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM LOCAL_MEMO", null);
+        if(!cursor.moveToFirst()){
+            return result;
+        }
+        do{
+            result.add(cursor.getString(0));
+        }while (cursor.moveToNext());
+        return result;
+    }
+
     public String[] getSelectedItem(String id){
         String result[] = new String[3];
         SQLiteDatabase db = getReadableDatabase();
