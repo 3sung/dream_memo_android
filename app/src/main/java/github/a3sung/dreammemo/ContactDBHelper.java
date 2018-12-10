@@ -51,7 +51,7 @@ public class ContactDBHelper extends SQLiteOpenHelper {
                     + "  "
                     + cursor.getString(1)
                     + "   "
-                    + cursor.getString(3);
+                    + cursor.getString(3).substring(2);
             result.add(temp);
         }
         return result;

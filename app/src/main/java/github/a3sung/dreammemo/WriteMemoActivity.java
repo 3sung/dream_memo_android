@@ -1,5 +1,6 @@
 package github.a3sung.dreammemo;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.ContactsContract;
@@ -35,6 +36,12 @@ public class WriteMemoActivity extends AppCompatActivity {
                 save_values();
             }
         });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoList();
+            }
+        });
     }
 
     private void init_tables(){
@@ -47,10 +54,17 @@ public class WriteMemoActivity extends AppCompatActivity {
 
         Long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy.MM.dd");
         String publishDate = simpleformat.format(date);
 
         dbHelper.insert(title.getText().toString(), context.getText().toString(), publishDate);
         Toast.makeText(getApplication(), "저장 완료!", Toast.LENGTH_SHORT).show();
+        gotoList();
     }
+
+    private void gotoList(){
+        Intent intent = new Intent(WriteMemoActivity.this, MyDreamPostListActivity.class);
+        startActivity(intent);
+    }
+
 }

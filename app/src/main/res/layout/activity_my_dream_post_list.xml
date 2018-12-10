@@ -59,14 +59,14 @@
             android:background="@drawable/search" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="370dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="100dp"
+        android:layout_height="330dp"
         android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
-        android:background="@drawable/btn_bg_ex">
+        android:background="@drawable/btn_bg_ex"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,11 +108,17 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/contexts"
+            android:id="@+id/local_memo_lists"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#ffffff"></ListView>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/local_memo_write"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="작성" />
 
 </LinearLayout>
