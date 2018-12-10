@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="My Dream">
+
+        <menu>
+            <item android:id="@+id/myDream" android:title="내 꿈 관리"/>
+        </menu>
+    </item>
+    <item android:title="Community">
+        <menu>
+            <item android:id="@+id/modified_Info" android:title="회원 정보 수정"/>
+            <item android:id="@+id/board" android:title="꿈 공유 게시판"/>
+
+        </menu>
+    </item>
+
+
+</menu>
