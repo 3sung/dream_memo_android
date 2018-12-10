@@ -59,7 +59,7 @@ public class WriteMemoActivity extends AppCompatActivity {
     }
 
     private void gotoList(){
-        Intent intent = new Intent(WriteMemoActivity.this, MyDreamPostListActivity.class);
+        Intent intent = new Intent(WriteMemoActivity.this, MemoListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

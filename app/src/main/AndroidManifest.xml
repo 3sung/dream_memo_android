@@ -11,8 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MemoListActivity" />
-        <activity android:name=".ViewMemoActivity" />
+        <activity android:name=".MemoListActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".WriteMemoActivity" />
         <activity android:name=".DreamAnalysisActivity" />
         <activity android:name=".SignUpActivity" />
@@ -21,17 +26,12 @@
         <activity android:name=".DreamPostListActivity" />
         <activity android:name=".ViewDreamPostActivity" />
         <activity android:name=".ViewCommentActivity" />
+        <activity android:name=".ViewMemoActivity"/>
         <activity android:name=".WriteDreamPostActivity" />
         <activity android:name=".CommentListActivity" />
         <activity android:name=".ModifyCommentActivity" />
         <activity android:name=".ModifyMemoActivity" />
-        <activity android:name=".MyDreamPostListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MyDreamPostListActivity" />
     </application>
 
 </manifest>

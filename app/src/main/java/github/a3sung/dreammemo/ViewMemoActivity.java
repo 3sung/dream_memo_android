@@ -39,7 +39,7 @@ public class ViewMemoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dbHelper.deleteItem(getApplicationContext(), selected_id);
-                Intent gotoList = new Intent(ViewMemoActivity.this, MyDreamPostListActivity.class);
+                Intent gotoList = new Intent(ViewMemoActivity.this, MemoListActivity.class);
                 gotoList.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(gotoList);
             }
