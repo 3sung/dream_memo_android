@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,11 +30,21 @@ public class MyDreamPostListActivity extends AppCompatActivity {
         localMemoWrite = (Button)findViewById(R.id.local_memo_write);
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lists);
         listView.setAdapter(adapter);
-        Log.d("finish", "test");
+
         localMemoWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MyDreamPostListActivity.this, WriteMemoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MyDreamPostListActivity.this, ViewMemoActivity.class);
+                String[] temp = lists.get(position).split(" ");
+                intent.putExtra("id", temp[0]);
                 startActivity(intent);
             }
         });

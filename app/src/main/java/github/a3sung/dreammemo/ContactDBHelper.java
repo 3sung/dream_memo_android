@@ -45,15 +45,39 @@ public class ContactDBHelper extends SQLiteOpenHelper {
         ArrayList<String> result = new ArrayList<String>();
 
         Cursor cursor = db.rawQuery("SELECT * FROM LOCAL_MEMO", null);
-        cursor.moveToFirst();
-        while (cursor.moveToNext()){
+        if(!cursor.moveToFirst()){
+            return result;
+        }
+        do{
             String temp =  cursor.getString(0)
-                    + "  "
+                    + "                "
                     + cursor.getString(1)
-                    + "   "
+                    + "                        "
                     + cursor.getString(3).substring(2);
             result.add(temp);
-        }
+        }while (cursor.moveToNext());
         return result;
+    }
+
+    public String[] getSelectedItem(String id){
+        String result[] = new String[3];
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM LOCAL_MEMO WHERE ID = " + id, null);
+        cursor.moveToFirst();
+        String temp = cursor.getString(1);
+        temp = cursor.getString(2);
+        temp = cursor.getString(3);
+        result[0] = cursor.getString(1);
+        result[1] = "keywords";
+        result[2] = cursor.getString(2);
+        return result;
+    }
+
+    public void deleteItem(Context context, String id){
+        SQLiteDatabase db=getWritableDatabase();
+        String sqlDelete = "DELETE FROM LOCAL_MEMO WHERE ID = " + id + ";";
+        db.execSQL(sqlDelete);
+        Toast.makeText(context, "삭제 완료!", Toast.LENGTH_SHORT).show();
     }
 }

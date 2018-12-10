@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 public class WriteMemoActivity extends AppCompatActivity {
     private Button cancel;
     private Button save;
-    ContactDBHelper dbHelper = null;
+    private ContactDBHelper dbHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,6 @@ public class WriteMemoActivity extends AppCompatActivity {
         cancel = (Button)findViewById(R.id.local_memo_cancel);
         save = (Button)findViewById(R.id.local_memo_save);
         init_tables();
-        Toast.makeText(getApplication(), "make DB!", Toast.LENGTH_SHORT).show();
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
