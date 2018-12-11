@@ -20,8 +20,11 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import github.a3sung.dreammemo.account.Account;
+import github.a3sung.dreammemo.account.AccountController;
 import github.a3sung.dreammemo.serverconnector.ErrorCallback;
 import github.a3sung.dreammemo.serverconnector.RequestCallback;
 import github.a3sung.dreammemo.serverconnector.ServerConnector;
@@ -46,6 +49,8 @@ public class ViewCommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_comment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        comments = new ArrayList<Comment>();
+        saveList = new ArrayList<Comment>();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,6 +61,7 @@ public class ViewCommentActivity extends AppCompatActivity {
         getintent = getIntent();
         boardID = getintent.getExtras().getString("boardID");
         UserID = getintent.getExtras().getString("UserID");
+
 
         commentList =findViewById(R.id.DreamComment);
         backButton = findViewById(R.id.back);
@@ -72,22 +78,27 @@ public class ViewCommentActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(commentText.length()>1){
+
                     ServerConnector svConn = ServerConnector.getInstatnce();
-                    svConn.requestPost(ServerConnector.BASE_URL + "board/replies", String.format("boardID=%s&content=%s", boardID, commentText.getText().toString()), new RequestCallback() {
+
+                    svConn.requestPostWithAuthorizeToken(ServerConnector.BASE_URL + "board/replies",AccountController.getInstance().getAccountToken(), String.format("boardID=%s&content=%s", boardID, commentText.getText().toString()), new RequestCallback() {
                         @Override
                         public void requestCallback(String result) {
+
+                            Log.d("Replies", "Replies Up success!");
                             Message msg = commentSuccessHandler.obtainMessage();
                             commentSuccessHandler.sendMessage(msg);
                         }
                     }, new ErrorCallback() {
                         @Override
                         public void errCallback(int resultCode) {
+                            Log.d("TAG", "err code" + resultCode);
                             Message msg = commentFailHandler.obtainMessage();
                             commentFailHandler.sendMessage(msg);
 
                         }
                     });
-                    Toast.makeText(getApplicationContext(), commentText.getText(), Toast.LENGTH_LONG).show();
+
                     commentText.getText().clear();
 
                 }
@@ -100,56 +111,39 @@ public class ViewCommentActivity extends AppCompatActivity {
 
 
 
-//        //get comment
-//        ServerConnector svConn = ServerConnector.getInstatnce();
-//        svConn.requestGet(ServerConnector.BASE_URL + "board/replies?boardID="+boardID, new RequestCallback() {
-//            @Override
-//            public void requestCallback(String result) {
-//                try {
-//                    JSONArray jsonArray = new JSONArray(result);
-//
-//                    for(int i=0; i<jsonArray.length();i++) {
-//                        commentID =jsonArray.getJSONObject(i).getString("ID");
-//                        boardID = jsonArray.getJSONObject(i).getString("BoardID");
-//                        UserID = jsonArray.getJSONObject(i).getString("UserID");
-//                        Content = jsonArray.getJSONObject(i).getString("Content");
-//
-//                        Comment comment = new Comment(commentID,boardID,UserID, Content);
-//                        comments.add(comment);
-//                        saveList.add(comment);
-//                    }
-//                    adapter = new CommentAdapter(getApplicationContext(),comments,saveList);
-//                    commentList.setAdapter(adapter);
-//
-////                    commentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-////                        @Override
-////                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////
-////                            //수정 구현해야됨.
-////                            Intent intent = new Intent(DreamPostListActivity.this,ViewDreamPostActivity.class);
-////                            intent.putExtra("boardID",boardDreams.get(position).getBoardID());
-////                            intent.putExtra("Title", boardDreams.get(position).getTitle());
-////                            intent.putExtra("UserID", boardDreams.get(position).getUserID());
-////                            intent.putExtra("DreamContent", boardDreams.get(position).getDreamContent());
-////                            intent.putExtra("CommentContent", boardDreams.get(position).getCommentContent());
-////                            intent.putExtra("Time", boardDreams.get(position).getTime());
-////                            DreamPostListActivity.this.startActivity(intent);
-////
-////                        }
-////                    });
-//
-//                    Message msg = commentSuccessHandler.obtainMessage();
-//                    commentSuccessHandler.sendMessage(msg);
-//                } catch (JSONException e) {
-//
-//                    e.printStackTrace();
-//
-//                    Message msg = commentFailHandler.obtainMessage();
-//                    commentFailHandler.sendMessage(msg);
-//
-//                }
-//            }
-//        });
+        //get comment
+        ServerConnector svConn = ServerConnector.getInstatnce();
+        svConn.requestGet(ServerConnector.BASE_URL + "board/replies?boardID="+boardID, new RequestCallback() {
+            @Override
+            public void requestCallback(String result) {
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+
+                    for(int i=0; i<jsonArray.length();i++) {
+                        commentID =jsonArray.getJSONObject(i).getString("ID");
+                        boardID = jsonArray.getJSONObject(i).getString("BoardID");
+                        UserID = jsonArray.getJSONObject(i).getString("UserID");
+                        Content = jsonArray.getJSONObject(i).getString("Content");
+
+                        Comment comment = new Comment(commentID,boardID,UserID, Content);
+                        comments.add(comment);
+                        saveList.add(comment);
+                    }
+                    adapter = new CommentAdapter(getApplicationContext(),comments,saveList);
+                    commentList.setAdapter(adapter);
+
+                    Message msg = getcommentSuccessHandler.obtainMessage();
+                    getcommentSuccessHandler.sendMessage(msg);
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                    Message msg = getcommentFailHandler.obtainMessage();
+                    getcommentFailHandler.sendMessage(msg);
+
+                }
+            }
+        });
 
 
 
@@ -160,6 +154,7 @@ public class ViewCommentActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Toast.makeText(getApplicationContext(), "댓글 등록", Toast.LENGTH_LONG).show();
 
         }
     };
@@ -167,6 +162,24 @@ public class ViewCommentActivity extends AppCompatActivity {
     private Handler commentFailHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
+            Toast.makeText(getApplicationContext(), "댓글 등록 실패", Toast.LENGTH_LONG).show();
+
+            super.handleMessage(msg);
+        }
+    };
+    private Handler getcommentSuccessHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+        }
+    };
+
+    private Handler getcommentFailHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            Toast.makeText(getApplicationContext(), "댓글 가져오기 실패", Toast.LENGTH_LONG).show();
+
             super.handleMessage(msg);
         }
     };
