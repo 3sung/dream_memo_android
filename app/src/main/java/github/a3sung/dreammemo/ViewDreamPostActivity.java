@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class ViewDreamPostActivity extends AppCompatActivity implements Navigati
         UserID = getintent.getExtras().getString("UserID");
         DreamContent = getintent.getExtras().getString("DreamContent");
         CommentContent = getintent.getExtras().getString("CommentContent");
-
+        boardID = getintent.getExtras().getString("boardID");
         titleboard = (TextView)findViewById(R.id.titleboard);
         commentContent=(TextView)findViewById(R.id.commentContent);
         DreamComment=(TextView)findViewById(R.id.DreamComment);
@@ -57,6 +58,7 @@ public class ViewDreamPostActivity extends AppCompatActivity implements Navigati
                 intent.putExtra("boardID",boardID);
                 intent.putExtra("UserID",UserID);
                 startActivity(intent);
+
             }
         });
         chart = findViewById(R.id.chart);
