@@ -57,6 +57,7 @@ public class ViewCommentActivity extends AppCompatActivity {
         boardID = getintent.getExtras().getString("boardID");
         UserID = getintent.getExtras().getString("UserID");
 
+        commentList =findViewById(R.id.DreamComment);
         backButton = findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +73,7 @@ public class ViewCommentActivity extends AppCompatActivity {
 
                 if(commentText.length()>1){
                     ServerConnector svConn = ServerConnector.getInstatnce();
-                    svConn.requestPost(ServerConnector.BASE_URL + "board/replies", String.format("boardID=%s&content=%s", boardID, commentText.getText()), new RequestCallback() {
+                    svConn.requestPost(ServerConnector.BASE_URL + "board/replies", String.format("boardID=%s&content=%s", boardID, commentText.getText().toString()), new RequestCallback() {
                         @Override
                         public void requestCallback(String result) {
                             Message msg = commentSuccessHandler.obtainMessage();
@@ -101,7 +102,7 @@ public class ViewCommentActivity extends AppCompatActivity {
 
 //        //get comment
 //        ServerConnector svConn = ServerConnector.getInstatnce();
-//        svConn.requestGet(ServerConnector.BASE_URL + "board/replies", new RequestCallback() {
+//        svConn.requestGet(ServerConnector.BASE_URL + "board/replies?boardID="+boardID, new RequestCallback() {
 //            @Override
 //            public void requestCallback(String result) {
 //                try {
@@ -120,11 +121,11 @@ public class ViewCommentActivity extends AppCompatActivity {
 //                    adapter = new CommentAdapter(getApplicationContext(),comments,saveList);
 //                    commentList.setAdapter(adapter);
 //
-//                    commentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                            //수정 구현해야됨.
+////                    commentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+////                        @Override
+////                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+////
+////                            //수정 구현해야됨.
 ////                            Intent intent = new Intent(DreamPostListActivity.this,ViewDreamPostActivity.class);
 ////                            intent.putExtra("boardID",boardDreams.get(position).getBoardID());
 ////                            intent.putExtra("Title", boardDreams.get(position).getTitle());
@@ -133,9 +134,9 @@ public class ViewCommentActivity extends AppCompatActivity {
 ////                            intent.putExtra("CommentContent", boardDreams.get(position).getCommentContent());
 ////                            intent.putExtra("Time", boardDreams.get(position).getTime());
 ////                            DreamPostListActivity.this.startActivity(intent);
-//
-//                        }
-//                    });
+////
+////                        }
+////                    });
 //
 //                    Message msg = commentSuccessHandler.obtainMessage();
 //                    commentSuccessHandler.sendMessage(msg);
@@ -149,7 +150,6 @@ public class ViewCommentActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-//        commentList =(ListView)findViewById(R.id.boardList);
 
 
 

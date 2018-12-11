@@ -88,13 +88,13 @@
 
 
 
-        <TextView
+        <ListView
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:id="@+id/DreamComment"
             android:background="@drawable/btn_bg_ex"
-            ></TextView>
+            ></ListView>
         <LinearLayout
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"

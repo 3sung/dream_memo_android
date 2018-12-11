@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginRight="20dp"
+        android:background="@drawable/btn_bg_ex2"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"

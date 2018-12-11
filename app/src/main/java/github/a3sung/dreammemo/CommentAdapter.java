@@ -39,7 +39,7 @@ public class CommentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(context,R.layout.board_dream,null);
+        View v = View.inflate(context,R.layout.comment_layout,null);
         TextView ID =(TextView) v.findViewById(R.id.ID);
         TextView BoardID =(TextView) v.findViewById(R.id.BoardID);
         TextView content =(TextView) v.findViewById(R.id.content);
