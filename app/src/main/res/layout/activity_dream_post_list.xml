@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    tools:context=".DreamPostListActivity">
 
 
 
@@ -20,7 +21,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#90A9D2"
             android:id="@+id/toolbar"
-
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:elevation="4dp"
@@ -51,7 +51,14 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawermenu" />
+        >
+
+        <ExpandableListView
+            android:layout_marginTop="200dp"
+            android:id="@+id/lvExp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.design.widget.NavigationView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -67,8 +74,8 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/searchKeyword"
-            android:hint="키워드 검색"/>
+            android:id="@+id/searchTitle"
+            android:hint="제목 검색"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -78,16 +85,7 @@
             android:layout_marginTop="10dp">
 
             <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_bg_ex1"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:gravity="center_horizontal"
-                android:text="키워드"/>
-            <TextView
-                android:layout_width="120dp"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_bg_ex1"
                 android:textColor="#ffffff"
@@ -96,7 +94,7 @@
                 android:gravity="center_horizontal"
                 android:text="제목"/>
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_bg_ex1"
                 android:textColor="#ffffff"
@@ -114,6 +112,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center_horizontal"
             android:id="@+id/boardList"
             ></ListView>
 

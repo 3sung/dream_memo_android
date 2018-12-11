@@ -51,7 +51,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawermenu" />
+        app:menu="@menu/drawer_menu" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_bg_ex"
                 android:id="@+id/titleView"
+                android:textColor="#000000"
                 android:text="제목   " />
 
             <TextView
@@ -83,6 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textColor="#000000"
                 android:background="@drawable/btn_bg_ex" />
 
         </LinearLayout>
@@ -91,12 +93,16 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:id="@+id/commentContent"
-            android:background="@drawable/btn_bg_ex"
+            android:textColor="#000000"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_bg_ex2"
 
             />
         <TextView
             android:layout_marginTop="10dp"
             android:textSize="20dp"
+            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_bg_ex"
@@ -105,22 +111,34 @@
 
         <TextView
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:id="@+id/DreamComment"
-            android:background="@drawable/btn_bg_ex"
+            android:textColor="#000000"
+            android:background="@drawable/btn_bg_ex2"
             ></TextView>
         <LinearLayout
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/btn_bg_ex"
+                android:id="@+id/ShowComment"
+                android:textColor="#000000"
                 android:text="댓글 보기"/>
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg_ex"
+                android:id="@+id/chart"
+                android:textColor="#000000"
                 android:text="목 록"/>
 
 

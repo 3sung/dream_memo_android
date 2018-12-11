@@ -3,6 +3,7 @@ package github.a3sung.dreammemo;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +20,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,7 +35,7 @@ import java.util.List;
 import github.a3sung.dreammemo.serverconnector.RequestCallback;
 import github.a3sung.dreammemo.serverconnector.ServerConnector;
 
-public class DreamPostListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class DreamPostListActivity extends AppCompatActivity {
 
 
     private ListView boardList;
@@ -45,24 +48,13 @@ public class DreamPostListActivity extends AppCompatActivity implements Navigati
     private List<BoardDream> boardDreams;
     private List<BoardDream> saveList;
     private BoardDreamAdapter adapter;
+    private DrawerLayout drawer;
 
 
-    private Handler boardSuccessHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-//            Toast.makeText(getApplicationContext(), "게시글 가져오기 성공", Toast.LENGTH_LONG).show();
 
-        }
-    };
 
-    private Handler boardFailHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Toast.makeText(getApplicationContext(), "게시글 가져오기 실패", Toast.LENGTH_LONG).show();
-        }
-    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +62,18 @@ public class DreamPostListActivity extends AppCompatActivity implements Navigati
         setContentView(R.layout.activity_dream_post_list);
         boardDreams = new ArrayList<BoardDream>();
         saveList = new ArrayList<BoardDream>();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
+
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new Navigation());
 
 
 
@@ -112,17 +104,13 @@ public class DreamPostListActivity extends AppCompatActivity implements Navigati
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                             Intent intent = new Intent(DreamPostListActivity.this,ViewDreamPostActivity.class);
+                            intent.putExtra("boardID",boardDreams.get(position).getBoardID());
                             intent.putExtra("Title", boardDreams.get(position).getTitle());
                             intent.putExtra("UserID", boardDreams.get(position).getUserID());
                             intent.putExtra("DreamContent", boardDreams.get(position).getDreamContent());
                             intent.putExtra("CommentContent", boardDreams.get(position).getCommentContent());
                             intent.putExtra("Time", boardDreams.get(position).getTime());
                             DreamPostListActivity.this.startActivity(intent);
-
-
-
-
-
 
                         }
                     });
@@ -141,8 +129,8 @@ public class DreamPostListActivity extends AppCompatActivity implements Navigati
             }
         });
         boardList =(ListView)findViewById(R.id.boardList);
-        EditText searchKeyword = (EditText) findViewById(R.id.searchKeyword);
-        searchKeyword.addTextChangedListener(new TextWatcher() {
+        EditText searchTitle = (EditText) findViewById(R.id.searchTitle);
+        searchTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -150,7 +138,7 @@ public class DreamPostListActivity extends AppCompatActivity implements Navigati
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchKeyword(s.toString());
+                searchTitle(s.toString());
             }
 
             @Override
@@ -163,11 +151,26 @@ public class DreamPostListActivity extends AppCompatActivity implements Navigati
     }
 
 
+    private Handler boardSuccessHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
 
-    public void searchKeyword(String search) {
+        }
+    };
+
+    private Handler boardFailHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
+
+
+    public void searchTitle(String search) {
         boardDreams.clear();
         for (int i = 0; i < saveList.size(); i++) {
-            if (saveList.get(i).getDreamContent().contains(search))
+            if (saveList.get(i).getTitle().contains(search))
                 boardDreams.add(saveList.get(i));
         }
         adapter.notifyDataSetChanged();
@@ -175,8 +178,7 @@ public class DreamPostListActivity extends AppCompatActivity implements Navigati
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -199,36 +201,15 @@ public class DreamPostListActivity extends AppCompatActivity implements Navigati
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            Toast.makeText(getApplicationContext(), "click setting", Toast.LENGTH_LONG).show();
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
 
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }
