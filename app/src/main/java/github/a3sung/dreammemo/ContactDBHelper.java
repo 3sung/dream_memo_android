@@ -41,20 +41,16 @@ public class ContactDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<String> getResult(){
+    public ArrayList<BoardDream> getResult(){
         SQLiteDatabase db = getReadableDatabase();
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<BoardDream> result = new ArrayList<BoardDream>();
 
         Cursor cursor = db.rawQuery("SELECT * FROM LOCAL_MEMO", null);
         if(!cursor.moveToFirst()){
             return result;
         }
         do{
-            String temp =  cursor.getString(4).replace("#", ",")
-                    + "                "
-                    + cursor.getString(1)
-                    + "                        "
-                    + cursor.getString(3).substring(2);
+            BoardDream temp = new BoardDream(cursor.getString(4).replace("#", ","), cursor.getString(1), cursor.getString(3).substring(2));
             result.add(temp);
         }while (cursor.moveToNext());
         return result;

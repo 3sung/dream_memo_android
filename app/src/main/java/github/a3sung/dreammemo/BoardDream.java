@@ -2,14 +2,13 @@ package github.a3sung.dreammemo;
 
 public class BoardDream {
     String BoardID;
-
-
-
+    String Keywords;
     String Title;
     String UserID;
     String DreamContent;
     String CommentContent;
     String Time;
+
     public BoardDream(String boardID ,String userID, String title, String dreamContent, String commentContent, String time) {
         BoardID = boardID;
         Title = title;
@@ -18,6 +17,17 @@ public class BoardDream {
         CommentContent = commentContent;
         Time = time;
     }
+
+    public BoardDream(String keywords, String title, String time){
+        Keywords = keywords;
+        Title = title;
+        Time = time;
+    }
+
+    public String getKeywords(){
+        return this.Keywords;
+    }
+
     public String getTitle() {
         return Title;
     }
@@ -25,6 +35,7 @@ public class BoardDream {
     public void setTitle(String title) {
         Title = title;
     }
+
     public String getBoardID() {
         return BoardID;
     }

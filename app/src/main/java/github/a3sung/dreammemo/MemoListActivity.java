@@ -17,14 +17,14 @@ import java.util.ArrayList;
 
 public class MemoListActivity extends AppCompatActivity {
 
-    private ArrayList<String> lists;
+    private ArrayList<BoardDream> lists;
     private ArrayList<String> listIds;
     private ContactDBHelper dbHelper;
     private ListView listView;
-    private ArrayAdapter<String> adapter;
+    private LocalDreamAdapter adapter;
     private Button localMemoWrite;
     private EditText editSearch;
-    private ArrayList<String> lists_copy;
+    private ArrayList<BoardDream> lists_copy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,10 @@ public class MemoListActivity extends AppCompatActivity {
         listIds = dbHelper.getIdList();
         listView = (ListView) findViewById(R.id.local_memo_lists);
         localMemoWrite = (Button)findViewById(R.id.local_memo_write);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lists);
+        adapter = new LocalDreamAdapter(lists);
         listView.setAdapter(adapter);
         editSearch = (EditText) findViewById(R.id.keyword_search);
-        lists_copy = new ArrayList<String>();
+        lists_copy = new ArrayList<BoardDream>();
         lists_copy.addAll(lists);
 
 
@@ -89,8 +89,8 @@ public class MemoListActivity extends AppCompatActivity {
 
         else {
             for(int i=0; i<lists_copy.size(); i++) {
-                String[] temp = lists_copy.get(i).split(" ");
-                if (temp[0].contains(searchText)) {
+                String temp = lists_copy.get(i).Keywords;
+                if (temp.contains(searchText)) {
                     Log.d("TEST", "editText: " + searchText);
                     Log.d("TEST", "lists(0): " + lists_copy.get(0));
                     lists.add(lists_copy.get(i));
