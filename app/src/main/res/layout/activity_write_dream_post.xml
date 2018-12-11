@@ -123,6 +123,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/btn_bg_ex"
+
             android:text="취소" />
 
         <Button
@@ -130,6 +132,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/btn_bg_ex"
+
             android:text="공유" />
     </LinearLayout>
 

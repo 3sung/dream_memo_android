@@ -53,12 +53,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/btn_bg_ex"
+
                 android:text="공유하기" />
 
             <Button
                 android:id="@+id/local_memo_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg_ex"
+
                 android:layout_weight="1"
                 android:text="수정하기" />
 
@@ -66,6 +70,8 @@
                 android:id="@+id/local_memo_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg_ex"
+
                 android:layout_weight="1"
                 android:text="삭제하기" />
         </LinearLayout>
