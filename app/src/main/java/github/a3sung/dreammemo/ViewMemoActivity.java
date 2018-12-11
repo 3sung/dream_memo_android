@@ -23,12 +23,13 @@ public class ViewMemoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         dbHelper = new ContactDBHelper(getApplicationContext());
         selected_id = intent.getStringExtra("id");
-        String[] selected_context = dbHelper.getSelectedItem(selected_id);
+        final String[] selected_context = dbHelper.getSelectedItem(selected_id);
         title = (TextView) findViewById(R.id.local_memo_view_title);
         keywords = (TextView) findViewById(R.id.local_memo_view_keywords);
         contexts = (TextView) findViewById(R.id.local_memo_view_context);
         Button delete = (Button) findViewById(R.id.local_memo_delete);
         Button update = (Button) findViewById(R.id.local_memo_update);
+        Button share = (Button) findViewById(R.id.local_memo_share);
 
         title.setText(selected_context[0]);
         keywords.setText(selected_context[1]);
@@ -54,6 +55,18 @@ public class ViewMemoActivity extends AppCompatActivity {
                 localMemoModify.putExtra("keywords", keywords.getText().toString());
                 localMemoModify.putExtra("context", contexts.getText().toString());
                 startActivity(localMemoModify);
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent writeShare = new Intent(ViewMemoActivity.this, WriteDreamPostActivity.class);
+                writeShare.putExtra("id", selected_id);
+                writeShare.putExtra("title", title.getText().toString());
+                writeShare.putExtra("keywords", keywords.getText().toString());
+                writeShare.putExtra("context", contexts.getText().toString());
+                startActivity(writeShare);
             }
         });
     }
