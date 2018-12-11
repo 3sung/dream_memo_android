@@ -11,31 +11,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MemoListActivity">
-
-        </activity>
+        <activity android:name=".MemoListActivity"></activity>
         <activity android:name=".ViewMemoActivity" />
         <activity android:name=".WriteMemoActivity" />
         <activity android:name=".DreamAnalysisActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity">
+
+        </activity>
+        <activity android:name=".ModifyAccountActivity" />
+        <activity android:name=".DreamPostListActivity"></activity>
+        <activity android:name=".ViewDreamPostActivity" />
+        <activity android:name=".ViewCommentActivity" />
+        <activity android:name=".WriteDreamPostActivity" />
+        <activity android:name=".CommentListActivity" />
+        <activity android:name=".ModifyCommentActivity" />
+        <activity android:name=".MyDreamPostListActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ModifyAccountActivity" />
-        <activity android:name=".DreamPostListActivity" >
-
-        </activity>
-
-        <activity android:name=".ViewDreamPostActivity" />
-        <activity android:name=".ViewCommentActivity" />
-        <activity android:name=".WriteDreamPostActivity" />
-        <activity android:name=".CommentListActivity" />
-        <activity android:name=".ModifyCommentActivity" />
-        <activity android:name=".MyDreamPostListActivity"></activity>
     </application>
 
 </manifest>
