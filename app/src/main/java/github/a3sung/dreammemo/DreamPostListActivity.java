@@ -48,7 +48,6 @@ public class DreamPostListActivity extends AppCompatActivity {
     private List<BoardDream> boardDreams;
     private List<BoardDream> saveList;
     private BoardDreamAdapter adapter;
-    private DrawerLayout drawer;
 
 
 
@@ -166,11 +165,7 @@ public class DreamPostListActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 
     @Override
