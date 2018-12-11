@@ -11,14 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MemoListActivity"></activity>
+        <activity android:name=".MemoListActivity" />
         <activity android:name=".ViewMemoActivity" />
         <activity android:name=".WriteMemoActivity" />
         <activity android:name=".DreamAnalysisActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".SignInActivity">
-
-        </activity>
+        <activity android:name=".SignInActivity" />
         <activity android:name=".ModifyAccountActivity" />
         <activity android:name=".DreamPostListActivity"></activity>
         <activity android:name=".ViewDreamPostActivity" />
