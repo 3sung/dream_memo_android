@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,7 +27,8 @@ public class ViewDreamPostActivity extends AppCompatActivity implements Navigati
     private TextView titleboard;
     private TextView commentContent;
     private TextView DreamComment;
-
+    private Button ShowComment;
+    private Button chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +38,7 @@ public class ViewDreamPostActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new Navigation());
 
         getintent = getIntent();
         Title = getintent.getExtras().getString("Title");
@@ -53,11 +49,29 @@ public class ViewDreamPostActivity extends AppCompatActivity implements Navigati
         titleboard = (TextView)findViewById(R.id.titleboard);
         commentContent=(TextView)findViewById(R.id.commentContent);
         DreamComment=(TextView)findViewById(R.id.DreamComment);
+        ShowComment = findViewById(R.id.ShowComment);
+        ShowComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewDreamPostActivity.this,ViewCommentActivity.class);
+                intent.putExtra("boardID",boardID);
+                intent.putExtra("UserID",UserID);
+                startActivity(intent);
+            }
+        });
+        chart = findViewById(R.id.chart);
+        chart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
-        titleboard.setText("야ㅑ야야야");
+        titleboard.setText(Title);
         commentContent.setText(CommentContent);
         DreamComment.setText(DreamContent);
+
 
     }
     @Override
