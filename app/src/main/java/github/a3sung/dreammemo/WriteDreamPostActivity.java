@@ -71,8 +71,6 @@ public class WriteDreamPostActivity extends AppCompatActivity {
                         shareFail.sendMessage(msg);
                     }
                 });
-
-                //keywordSender.requestPostWithAuthorizeToken(ServerConnector.BASE_URL + "board/keywords", token, );
             }
         });
 
