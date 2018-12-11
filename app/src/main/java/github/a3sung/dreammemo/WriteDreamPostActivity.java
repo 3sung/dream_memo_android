@@ -55,7 +55,7 @@ public class WriteDreamPostActivity extends AppCompatActivity {
                 ServerConnector keywordSender = ServerConnector.getInstatnce();
                 String token = userController.getAccountToken();
 
-                contextSender.requestPostWithAuthorizeToken(ServerConnector.BASE_URL + "board", token, String.format("title=%s&dreamContent=%s&commentContent=%s", title, context, comment), new RequestCallback(){
+                contextSender.requestPostWithAuthorizeToken(ServerConnector.BASE_URL + "board", token, String.format("title=%s&dreamContent=%s&commentContent=%s", title.getText().toString(), title.getText().toString(), title.getText().toString()), new RequestCallback(){
 
                     @Override
                     public void requestCallback(String result) {
