@@ -49,7 +49,7 @@
             android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
-            android:background="@drawable/btn_ex"
+            android:background="@drawable/btn_bg_ex"
             android:hint="키워드 검색"
             android:textSize="25dp"
             android:textStyle="bold" />

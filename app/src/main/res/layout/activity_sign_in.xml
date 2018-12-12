@@ -33,7 +33,7 @@
             android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000000"
+            android:background="@drawable/btn_bg_ex"
             android:onClick="onClickSignIn"
             android:text="Sign In"
             android:textColor="#ffffff" />
