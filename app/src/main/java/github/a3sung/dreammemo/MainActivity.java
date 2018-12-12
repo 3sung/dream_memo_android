@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Intent moveIntent = new Intent(this, SignInActivity.class);
+            moveIntent.putExtra("isBackToShare", true);
             startActivity(moveIntent);
         }
 

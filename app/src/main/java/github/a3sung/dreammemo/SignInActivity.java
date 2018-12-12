@@ -22,15 +22,26 @@ public class SignInActivity extends AppCompatActivity {
 
     private EditText txtId;
     private EditText txtPw;
-
+    private Intent getFlag;
     private Handler loginSuccessHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_LONG).show();
             finish();
-            Intent goToDreamPostListActivity = new Intent(SignInActivity.this, DreamPostListActivity.class);
-            startActivity(goToDreamPostListActivity);
+            if(getFlag.getBooleanExtra("isBackToShare", true)){
+                Intent goToWritePostListActivity = new Intent(SignInActivity.this, WriteDreamPostActivity.class);
+                goToWritePostListActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                goToWritePostListActivity.putExtra("id", getFlag.getStringExtra("id"));
+                goToWritePostListActivity.putExtra("title", getFlag.getStringExtra("title"));
+                goToWritePostListActivity.putExtra("keywords", getFlag.getStringExtra("keywords"));
+                goToWritePostListActivity.putExtra("context", getFlag.getStringExtra("context"));
+                startActivity(goToWritePostListActivity);
+            }
+            else{
+                Intent goToDreamPostListActivity = new Intent(SignInActivity.this, DreamPostListActivity.class);
+                startActivity(goToDreamPostListActivity);
+            }
         }
     };
 
@@ -48,6 +59,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         txtId = findViewById(R.id.txtId);
         txtPw = findViewById(R.id.txtPw);
+        getFlag = getIntent();
     }
 
     public void onClickSignIn(View view){

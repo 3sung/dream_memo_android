@@ -55,11 +55,20 @@ public class WriteDreamPostActivity extends AppCompatActivity {
                 ServerConnector keywordSender = ServerConnector.getInstatnce();
                 String token = userController.getAccountToken();
 
+                if(!userController.isSignIn()){
+                    Intent moveIntent = new Intent(WriteDreamPostActivity.this, SignInActivity.class);
+                    moveIntent.putExtra("isBackToShare", true);
+                    moveIntent.putExtra("id", id);
+                    moveIntent.putExtra("title", title.getText().toString());
+                    moveIntent.putExtra("keywords", keywords.getText().toString());
+                    moveIntent.putExtra("context", context.getText().toString());
+                    startActivity(moveIntent);
+                }
                 contextSender.requestPostWithAuthorizeToken(ServerConnector.BASE_URL + "board", token, String.format("title=%s&dreamContent=%s&commentContent=%s", title.getText().toString(), context.getText().toString(), comment.getText().toString()), new RequestCallback(){
 
                     @Override
                     public void requestCallback(String result) {
-                        Log.d("Account", "Sign Up success!");
+                        Log.d("Account", "succes share!");
                         Message msg = shareSuccess.obtainMessage();
                         shareSuccess.sendMessage(msg);
                     }
@@ -89,8 +98,6 @@ public class WriteDreamPostActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Toast.makeText(getApplicationContext(), "공유 완료!", Toast.LENGTH_SHORT).show();
-            finish();
         }
     };
 
@@ -98,8 +105,6 @@ public class WriteDreamPostActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Toast.makeText(getApplicationContext(), "공유 실패!", Toast.LENGTH_SHORT).show();
-            finish();
         }
     };
 }
