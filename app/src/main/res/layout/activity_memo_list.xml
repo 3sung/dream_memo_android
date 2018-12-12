@@ -111,13 +111,31 @@
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/local_memo_write"
-        android:background="@drawable/btn_bg_ex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="작성" />
+        android:orientation="horizontal">
+
+        <Button
+
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/back"
+            android:background="@drawable/btn_bg_ex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="뒤로가기" />
+        <Button
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/local_memo_write"
+            android:background="@drawable/btn_bg_ex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

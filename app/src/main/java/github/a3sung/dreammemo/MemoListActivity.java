@@ -23,6 +23,8 @@ public class MemoListActivity extends AppCompatActivity {
     private ListView listView;
     private LocalDreamAdapter adapter;
     private Button localMemoWrite;
+    private Button backbutton;
+
     private EditText editSearch;
     private ArrayList<BoardDream> lists_copy;
 
@@ -36,12 +38,20 @@ public class MemoListActivity extends AppCompatActivity {
         listIds = dbHelper.getIdList();
         listView = (ListView) findViewById(R.id.local_memo_lists);
         localMemoWrite = (Button)findViewById(R.id.local_memo_write);
+        backbutton = (Button)findViewById(R.id.back);
+
         adapter = new LocalDreamAdapter(lists);
         listView.setAdapter(adapter);
         editSearch = (EditText) findViewById(R.id.keyword_search);
         lists_copy = new ArrayList<BoardDream>();
         lists_copy.addAll(lists);
 
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    finish();
+            }
+        });
 
         localMemoWrite.setOnClickListener(new View.OnClickListener() {
             @Override
