@@ -1,146 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
-
-
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <android.support.v7.widget.Toolbar
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#90A9D2"
-            android:id="@+id/toolbar"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:elevation="4dp"
-            >
-            <FrameLayout
-                android:id="@+id/fragment_container"
+            <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="?attr/actionBarSize"
+                android:background="#90A9D2"
+                android:id="@+id/toolbar"
+
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:elevation="4dp"
+                >
+                <FrameLayout
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/txv_toolbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:text="게시물 상세보기"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </FrameLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
                 <TextView
-                    android:id="@+id/txv_toolbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:text="게시물 상세보기"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:background="@drawable/btn_bg_ex"
+                    android:id="@+id/titleView"
+                    android:textColor="#000000"
+                    android:text="제목   " />
 
-            </FrameLayout>
+                <TextView
 
-        </android.support.v7.widget.Toolbar>
+                    android:id="@+id/titleboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="#000000"
+                    android:background="@drawable/btn_bg_ex" />
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginRight="20dp"
-        >
-        <LinearLayout
-            android:layout_marginTop="70dp"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-
+            </LinearLayout>
             <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/commentContent"
+                android:textColor="#000000"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/btn_bg_ex2"
+
+                />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:textColor="#000000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_bg_ex"
-                android:id="@+id/titleView"
-                android:textColor="#000000"
-                android:text="제목   " />
+                android:text="기존 꿈 메모 내용"/>
+
 
             <TextView
-
-                android:id="@+id/titleboard"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_height="200dp"
+                android:id="@+id/DreamComment"
                 android:textColor="#000000"
-                android:background="@drawable/btn_bg_ex" />
+                android:background="@drawable/btn_bg_ex2"
+                ></TextView>
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/btn_bg_ex"
+                    android:id="@+id/ShowComment"
+                    android:textColor="#000000"
+                    android:text="댓글 보기"/>
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg_ex"
+                    android:id="@+id/chart"
+                    android:textColor="#000000"
+                    android:text="목 록"/>
 
+
+            </LinearLayout>
         </LinearLayout>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/commentContent"
-            android:textColor="#000000"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/btn_bg_ex2"
-
-            />
-        <TextView
-            android:layout_marginTop="10dp"
-            android:textSize="20dp"
-            android:textColor="#000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_bg_ex"
-            android:text="기존 꿈 메모 내용"/>
-
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/DreamComment"
-            android:textColor="#000000"
-            android:background="@drawable/btn_bg_ex2"
-            ></TextView>
-        <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/btn_bg_ex"
-                android:id="@+id/ShowComment"
-                android:textColor="#000000"
-                android:text="댓글 보기"/>
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_bg_ex"
-                android:id="@+id/chart"
-                android:textColor="#000000"
-                android:text="목 록"/>
-
-
-        </LinearLayout>
-
-
-
-
-
     </LinearLayout>
-
-
-</android.support.v4.widget.DrawerLayout>
+</ScrollView>
