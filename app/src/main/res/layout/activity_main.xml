@@ -6,14 +6,21 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
+    android:background="#005490"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:gravity="center"
+        >
 
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/dream1"/>
+    </LinearLayout>
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@drawable/dream"/>
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
