@@ -54,7 +54,7 @@ public class WriteDreamPostActivity extends AppCompatActivity {
                 ServerConnector contextSender = ServerConnector.getInstatnce();
                 ServerConnector keywordSender = ServerConnector.getInstatnce();
                 String token = userController.getAccountToken();
-
+                
                 if(!userController.isSignIn()){
                     Intent moveIntent = new Intent(WriteDreamPostActivity.this, SignInActivity.class);
                     moveIntent.putExtra("isBackToShare", true);
@@ -98,6 +98,8 @@ public class WriteDreamPostActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Toast.makeText(WriteDreamPostActivity.this, "공유 완료!", Toast.LENGTH_SHORT).show();
+            finish();
         }
     };
 
