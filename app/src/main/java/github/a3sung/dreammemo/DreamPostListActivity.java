@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import github.a3sung.dreammemo.serverconnector.RequestCallback;
@@ -83,6 +84,8 @@ public class DreamPostListActivity extends AppCompatActivity {
                         boardDreams.add(boardDream);
                         saveList.add(boardDream);
                     }
+                    Collections.reverse(boardDreams);
+                    Collections.reverse(saveList);
                     adapter = new BoardDreamAdapter(getApplicationContext(),boardDreams,saveList);
                     boardList.setAdapter(adapter);
 

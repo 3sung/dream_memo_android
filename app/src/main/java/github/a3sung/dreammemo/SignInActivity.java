@@ -36,6 +36,8 @@ public class SignInActivity extends AppCompatActivity {
                 goToWritePostListActivity.putExtra("title", getFlag.getStringExtra("title"));
                 goToWritePostListActivity.putExtra("keywords", getFlag.getStringExtra("keywords"));
                 goToWritePostListActivity.putExtra("context", getFlag.getStringExtra("context"));
+                goToWritePostListActivity.putExtra("comment", getFlag.getStringExtra("comment"));
+                goToWritePostListActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(goToWritePostListActivity);
             }
             else{

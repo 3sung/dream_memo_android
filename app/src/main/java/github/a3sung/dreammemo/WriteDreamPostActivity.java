@@ -47,12 +47,15 @@ public class WriteDreamPostActivity extends AppCompatActivity {
         keywords.setText(getInfo.getStringExtra("keywords"));
         context.setText(getInfo.getStringExtra("context"));
 
+        if(getInfo.getStringExtra("comment") != null){
+            comment.setText(getInfo.getStringExtra("comment"));
+        }
+
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AccountController userController = AccountController.getInstance();
                 ServerConnector contextSender = ServerConnector.getInstatnce();
-                ServerConnector keywordSender = ServerConnector.getInstatnce();
                 String token = userController.getAccountToken();
                 
                 if(!userController.isSignIn()){
@@ -62,6 +65,7 @@ public class WriteDreamPostActivity extends AppCompatActivity {
                     moveIntent.putExtra("title", title.getText().toString());
                     moveIntent.putExtra("keywords", keywords.getText().toString());
                     moveIntent.putExtra("context", context.getText().toString());
+                    moveIntent.putExtra("comment", comment.getText().toString());
                     startActivity(moveIntent);
                 }
                 contextSender.requestPostWithAuthorizeToken(ServerConnector.BASE_URL + "board", token, String.format("title=%s&dreamContent=%s&commentContent=%s", title.getText().toString(), context.getText().toString(), comment.getText().toString()), new RequestCallback(){
@@ -98,7 +102,6 @@ public class WriteDreamPostActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Toast.makeText(WriteDreamPostActivity.this, "공유 완료!", Toast.LENGTH_SHORT).show();
             finish();
         }
     };
