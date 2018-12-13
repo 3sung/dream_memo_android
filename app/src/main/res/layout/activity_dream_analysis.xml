@@ -22,21 +22,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="해몽 내용" />
+                android:text="해몽 내용"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/labelContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="신기한 해몽 스토리\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" />
+                android:text="신기한 해몽" />
 
             <TextView
                 android:id="@+id/labelTagTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="관련 키워드" />
+                android:text="관련 키워드"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/labelTag"

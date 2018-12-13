@@ -36,7 +36,7 @@ public class DreamAnalysisActivity extends AppCompatActivity {
         Intent fromIntent = getIntent();
         try {
             if (fromIntent.getExtras() != null){
-                String tagStr = fromIntent.getExtras().getString("tag");
+                String tagStr = fromIntent.getExtras().getString("tags");
                 if (tagStr != null){
                     JSONArray tagObj = new JSONArray(tagStr);
                     for (int i = 0; i < tagObj.length(); i++){
@@ -60,16 +60,20 @@ public class DreamAnalysisActivity extends AppCompatActivity {
         }
 
         ServerConnector svConn = ServerConnector.getInstatnce();
-        svConn.requestPost(ServerConnector.BASE_URL + "dream_analysis", "tag=" + jArr.toString(), new RequestCallback() {
+        svConn.requestGet(ServerConnector.BASE_URL + "dream_analysis?tags=" + jArr.toString(), new RequestCallback() {
             @Override
             public void requestCallback(String result) {
                 try {
-                    JSONObject jObj = new JSONObject(result);
-                    for (String tag : tags){
-                        String content = jObj.getString(tag);
-                        labelContent.append(tag+"의 풀이\n");
+                    labelContent.setText("");
+                    JSONArray jArr = new JSONArray(result);
+                     for (int idx = 0; idx < jArr.length(); idx++){
+                         JSONObject jObj = (JSONObject) jArr.get(idx);
+                         String tagStr = jObj.getString("tag");
+                         String content = jObj.getString("content");
+                        labelContent.append(tagStr+"의 풀이\n");
                         if (content != null){
                             labelContent.append(content);
+                            labelContent.append("\n");
                         }
                     }
                 } catch (JSONException e) {
