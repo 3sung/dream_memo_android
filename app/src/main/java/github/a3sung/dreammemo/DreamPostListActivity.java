@@ -160,7 +160,9 @@ public class DreamPostListActivity extends AppCompatActivity {
             if (saveList.get(i).getTitle().contains(search))
                 boardDreams.add(saveList.get(i));
         }
-        adapter.notifyDataSetChanged();
+        if (adapter != null){
+            adapter.notifyDataSetChanged();
+        }
 
     }
     @Override
