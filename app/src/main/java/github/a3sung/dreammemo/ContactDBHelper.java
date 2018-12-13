@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ContactDBHelper extends SQLiteOpenHelper {
 
@@ -53,6 +54,7 @@ public class ContactDBHelper extends SQLiteOpenHelper {
             BoardDream temp = new BoardDream(cursor.getString(4).replace("#", ","), cursor.getString(1), cursor.getString(3).substring(2));
             result.add(temp);
         }while (cursor.moveToNext());
+        Collections.reverse(result);
         return result;
     }
 
@@ -67,6 +69,7 @@ public class ContactDBHelper extends SQLiteOpenHelper {
         do{
             result.add(cursor.getString(0));
         }while (cursor.moveToNext());
+        Collections.reverse(result);
         return result;
     }
 
