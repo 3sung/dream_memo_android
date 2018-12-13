@@ -29,7 +29,7 @@ public class SignInActivity extends AppCompatActivity {
             super.handleMessage(msg);
             Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_LONG).show();
             finish();
-            if(getFlag.getBooleanExtra("isBackToShare", true)){
+            if(getFlag.getBooleanExtra("isBackToShare", false)){
                 Intent goToWritePostListActivity = new Intent(SignInActivity.this, WriteDreamPostActivity.class);
                 goToWritePostListActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 goToWritePostListActivity.putExtra("id", getFlag.getStringExtra("id"));
