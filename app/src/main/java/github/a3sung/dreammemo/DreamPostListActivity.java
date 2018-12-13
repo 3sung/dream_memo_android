@@ -49,6 +49,7 @@ public class DreamPostListActivity extends AppCompatActivity {
     private List<BoardDream> boardDreams;
     private List<BoardDream> saveList;
     private BoardDreamAdapter adapter;
+    private String boardResult;
 
 
 
@@ -69,53 +70,11 @@ public class DreamPostListActivity extends AppCompatActivity {
         svConn.requestGet(ServerConnector.BASE_URL + "board", new RequestCallback() {
             @Override
             public void requestCallback(String result) {
-                try {
-                    JSONArray jsonArray = new JSONArray(result);
 
-                    for(int i=0; i<jsonArray.length();i++) {
-                        boardID = jsonArray.getJSONObject(i).getString("ID");
-                        UserID = jsonArray.getJSONObject(i).getString("UserID");
-                        Title = jsonArray.getJSONObject(i).getString("Title");
-                        DreamContent = jsonArray.getJSONObject(i).getString("DreamContent");
-                        CommentContent = jsonArray.getJSONObject(i).getString("CommentContent");
-                        Time = jsonArray.getJSONObject(i).getString("Time");
-                        Time = Time.substring(0,10);
-                        BoardDream boardDream = new BoardDream(boardID,UserID,Title, DreamContent,  CommentContent,  Time);
-                        boardDreams.add(boardDream);
-                        saveList.add(boardDream);
-                    }
-                    Collections.reverse(boardDreams);
-                    Collections.reverse(saveList);
-                    adapter = new BoardDreamAdapter(getApplicationContext(),boardDreams,saveList);
-                    boardList.setAdapter(adapter);
+                boardResult = result;
+                Message msg = boardSuccessHandler.obtainMessage();
+                boardSuccessHandler.sendMessage(msg);
 
-                    boardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                            Intent intent = new Intent(DreamPostListActivity.this,ViewDreamPostActivity.class);
-                            intent.putExtra("boardID",boardDreams.get(position).getBoardID());
-                            intent.putExtra("Title", boardDreams.get(position).getTitle());
-                            intent.putExtra("UserID", boardDreams.get(position).getUserID());
-                            intent.putExtra("DreamContent", boardDreams.get(position).getDreamContent());
-                            intent.putExtra("CommentContent", boardDreams.get(position).getCommentContent());
-                            intent.putExtra("Time", boardDreams.get(position).getTime());
-                            DreamPostListActivity.this.startActivity(intent);
-
-                        }
-                    });
-
-                    Message msg = boardSuccessHandler.obtainMessage();
-                    boardSuccessHandler.sendMessage(msg);
-                } catch (JSONException e) {
-
-                    e.printStackTrace();
-                    // TODO: (중요도1) 로그인 실패 시 로그인 제한 되게 하기
-
-                    Message msg = boardFailHandler.obtainMessage();
-                    boardFailHandler.sendMessage(msg);
-
-                }
             }
         });
         boardList =(ListView)findViewById(R.id.boardList);
@@ -145,6 +104,48 @@ public class DreamPostListActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            try {
+                JSONArray jsonArray = new JSONArray(boardResult);
+
+                for(int i=0; i<jsonArray.length();i++) {
+                    boardID = jsonArray.getJSONObject(i).getString("ID");
+                    UserID = jsonArray.getJSONObject(i).getString("UserID");
+                    Title = jsonArray.getJSONObject(i).getString("Title");
+                    DreamContent = jsonArray.getJSONObject(i).getString("DreamContent");
+                    CommentContent = jsonArray.getJSONObject(i).getString("CommentContent");
+                    Time = jsonArray.getJSONObject(i).getString("Time");
+                    Time = Time.substring(0,10);
+                    BoardDream boardDream = new BoardDream(boardID,UserID,Title, DreamContent,  CommentContent,  Time);
+                    boardDreams.add(boardDream);
+                    saveList.add(boardDream);
+                }
+                Collections.reverse(boardDreams);
+                Collections.reverse(saveList);
+                adapter = new BoardDreamAdapter(getApplicationContext(),boardDreams,saveList);
+                boardList.setAdapter(adapter);
+
+                boardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Intent intent = new Intent(DreamPostListActivity.this,ViewDreamPostActivity.class);
+                        intent.putExtra("boardID",boardDreams.get(position).getBoardID());
+                        intent.putExtra("Title", boardDreams.get(position).getTitle());
+                        intent.putExtra("UserID", boardDreams.get(position).getUserID());
+                        intent.putExtra("DreamContent", boardDreams.get(position).getDreamContent());
+                        intent.putExtra("CommentContent", boardDreams.get(position).getCommentContent());
+                        intent.putExtra("Time", boardDreams.get(position).getTime());
+                        DreamPostListActivity.this.startActivity(intent);
+
+                    }
+                });
+
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+                // TODO: (중요도1) 로그인 실패 시 로그인 제한 되게 하기
+
+            }
 
         }
     };
