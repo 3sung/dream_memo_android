@@ -53,6 +53,14 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/local_memo_analysis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_ex"
+                android:text="해몽하기" />
+
+            <Button
                 android:id="@+id/local_memo_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
