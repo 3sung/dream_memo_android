@@ -101,7 +101,12 @@
                 android:background="@drawable/btn_bg_ex"
                 android:id="@+id/back"
                 android:text="뒤로 가기"/>
-
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg_ex"
+                android:id="@+id/btnRefresh"
+                android:text="새로고침"/>
 
         </LinearLayout>
 

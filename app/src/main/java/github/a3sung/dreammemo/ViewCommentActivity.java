@@ -31,7 +31,7 @@ import github.a3sung.dreammemo.serverconnector.ServerConnector;
 
 public class ViewCommentActivity extends AppCompatActivity {
 
-    private Button backButton;
+    private Button backButton, refreshButton;
     private Intent getintent;
     private String boardID;
     private String UserID;
@@ -43,6 +43,7 @@ public class ViewCommentActivity extends AppCompatActivity {
     private ListView commentList;
     private EditText commentText;
     private Button writeButton;
+    private String commentResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,13 @@ public class ViewCommentActivity extends AppCompatActivity {
             }
         });
         commentText = findViewById(R.id.comment);
+        refreshButton = findViewById(R.id.btnRefresh);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadComment();
+            }
+        });
         writeButton = findViewById(R.id.writeButton);
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,50 +114,38 @@ public class ViewCommentActivity extends AppCompatActivity {
 
 
         //get comment
-        ServerConnector svConn = ServerConnector.getInstatnce();
-        svConn.requestGet(ServerConnector.BASE_URL + "board/replies?boardID="+boardID, new RequestCallback() {
-            @Override
-            public void requestCallback(String result) {
-                try {
-                    JSONArray jsonArray = new JSONArray(result);
-
-                    for(int i=0; i<jsonArray.length();i++) {
-                        commentID =jsonArray.getJSONObject(i).getString("ID");
-                        boardID = jsonArray.getJSONObject(i).getString("BoardID");
-                        UserID = jsonArray.getJSONObject(i).getString("UserID");
-                        Content = jsonArray.getJSONObject(i).getString("Content");
-
-                        Comment comment = new Comment(commentID,boardID,UserID, Content);
-                        comments.add(comment);
-                        saveList.add(comment);
-                    }
-                    adapter = new CommentAdapter(getApplicationContext(),comments,saveList);
-                    commentList.setAdapter(adapter);
-
-                    Message msg = getcommentSuccessHandler.obtainMessage();
-                    getcommentSuccessHandler.sendMessage(msg);
-                } catch (JSONException e) {
-
-                    e.printStackTrace();
-
-                    Message msg = getcommentFailHandler.obtainMessage();
-                    getcommentFailHandler.sendMessage(msg);
-
-                }
-            }
-        });
+        loadComment();
 
 
 
 
 
     }
+
+    private void loadComment(){
+        comments = new ArrayList<>();
+        saveList = new ArrayList<>();
+        adapter = new CommentAdapter(getApplicationContext(),comments,saveList);
+        commentList.setAdapter(adapter);
+        //get comment
+        ServerConnector svConn = ServerConnector.getInstatnce();
+        svConn.requestGet(ServerConnector.BASE_URL + "board/replies?boardID="+boardID, new RequestCallback() {
+            @Override
+            public void requestCallback(String result) {
+                    commentResult = result;
+                    Message msg = getcommentSuccessHandler.obtainMessage();
+                    getcommentSuccessHandler.sendMessage(msg);
+
+            }
+        });
+    }
+
     private Handler commentSuccessHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Toast.makeText(getApplicationContext(), "댓글 등록", Toast.LENGTH_LONG).show();
-
+            loadComment();
         }
     };
 
@@ -165,6 +161,25 @@ public class ViewCommentActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = new JSONArray(commentResult);
+                for(int i=0; i<jsonArray.length();i++) {
+                    commentID =jsonArray.getJSONObject(i).getString("ID");
+                    boardID = jsonArray.getJSONObject(i).getString("BoardID");
+                    UserID = jsonArray.getJSONObject(i).getString("UserID");
+                    Content = jsonArray.getJSONObject(i).getString("Content");
+
+                    Comment comment = new Comment(commentID,boardID,UserID, Content);
+                    comments.add(comment);
+                    saveList.add(comment);
+                }
+                adapter = new CommentAdapter(getApplicationContext(),comments,saveList);
+                commentList.setAdapter(adapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
 
         }
     };
